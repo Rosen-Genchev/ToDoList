@@ -7,25 +7,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import java.util.Calendar;
-import java.util.Locale;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -121,10 +103,10 @@ public class editTask extends AppCompatActivity {
     }
 
     private void updateDateAndTimeTextViews() {
-        String dateString = String.format(Locale.getDefault(), "%02d/%02d/%d", mDay, mMonth + 1, mYear);
+        String dateString = String.format(Locale.US, "%02d/%02d/%d", mDay, mMonth + 1, mYear);
         selectedDateTextView.setText(dateString);
 
-        String timeString = String.format(Locale.getDefault(), "%02d:%02d", mHour, mMinute);
+        String timeString = String.format(Locale.US, "%02d:%02d", mHour, mMinute);
         selectedTimeTextView.setText(timeString);
     }
 
@@ -162,9 +144,9 @@ public class editTask extends AppCompatActivity {
     private void editTask(String task) {
         String category = categorySpinner.getSelectedItem().toString();
         String priority = prioritySpinner.getSelectedItem().toString();
-        String notes = notesEditText.getText().toString().trim();
-        String dueDate = selectedDateTextView.getText().toString().trim();
-        String dueTime = selectedTimeTextView.getText().toString().trim();
+        String notes = notesEditText.getText().toString();
+        String dueDate = selectedDateTextView.getText().toString();
+        String dueTime = selectedTimeTextView.getText().toString();
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -180,5 +162,3 @@ public class editTask extends AppCompatActivity {
 
     }
 }
-
-
